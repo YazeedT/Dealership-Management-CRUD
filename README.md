@@ -5,7 +5,6 @@ This is a comprehensive web portal designed for the management of cars and trans
 ## Features
 - **Comprehensive Dashboard**: Visually appealing interfaces to manage cars, transactions, and related entities.
 - **Dynamic Data Management**: Efficient CRUD operations for cars, customers, salespeople, finance companies, features and transactions.
-- **Responsive Design**: Ensures optimal user experience across different device sizes.
 - **Modular Code Structure**: Separation of routes, database connectors, and views for easier maintenance.
 
 ## Technologies Used
