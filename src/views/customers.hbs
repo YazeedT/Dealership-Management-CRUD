@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <!-- Navbar -->
+    <table width="70%">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="cars">Cars</a></td>
+            <td><a href="customers">Customers</a></td>
+            <td><a href="transactions">Transactions</a></td>
+            <td><a href="salespeople">Salespeople</a></td>
+            <td><a href="financeCompanies">Finance Companies</a></td>
+            <td><a href="features">Features</a></td>
+            <td><a href="carFeatures">Car Features</a></td>
+        </tr>
+    </table>
+
+    <!-- Display Customers -->
+    <h1>Customers</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>Street 2</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.Customer_id}}</td>
+                <td>{{this.Customer_fname}}</td>
+                <td>{{this.Customer_lname}}</td>
+                <td>{{this.Customer_phone}}</td>
+                <td>{{this.Customer_email}}</td>
+                <td>{{this.Customer_street}}</td>
+                <td>{{this.Customer_second_street}}</td>
+                <td>{{this.Customer_city}}</td>
+                <td>{{this.Customer_state}}</td>
+                <td>{{this.Customer_zip}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    
+    <!-- Form for creating a new Customer -->
+    <h2 class="form-title">Add a Customer</h2>
+    <form class="customer-form" id="createCustomer" method="POST" action="/createCustomer">
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" name="firstName" id="firstName" required>
+        </div>
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" name="lastName" id="lastName" required>
+        </div>
+        <div>
+            <label for="phone">Phone Number:</label>
+            <input type="text" name="phone" id="phone" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" required>
+        </div>
+        <div>
+            <label for="street">Street:</label>
+            <input type="text" name="street" id="street" required>
+        </div>
+        <div>
+            <label for="street2">Street 2:</label>
+            <input type="text" name="street2" id="street2">
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" required>
+        </div>
+        <div>
+            <label for="state">State:</label>
+            <input type="text" name="state" id="state" required>
+        </div>
+        <div>
+            <label for="zip">Zip code:</label>
+            <input type="number" name="zip" id="zip" required>
+        </div>
+
+        <div>
+            <button type="submit" class="submit-button">Create</button>
+        </div>
+    </form>
+
+    <!-- Form for updating a Customer -->
+    <h2 class="form-title">Update a Customer</h2>
+    <form class="customer-form" id="updateCustomer" method="POST" action="/updateCustomer">
+        <div>
+            <label for="customerID">Select a Customer:</label>
+            <select name="customerID" id="updateCustomerSelect">
+                <option selected>Choose a customer</option>
+                {{#each data}}
+                <option value="{{this.Customer_id}}">{{this.Customer_fname}} {{this.Customer_lname}} - {{this.Customer_phone}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" name="firstName" id="updateFirstName" required>
+        </div>
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" name="lastName" id="updateLastName" required>
+        </div>
+        <div>
+            <label for="phone">Phone Number:</label>
+            <input type="text" name="phone" id="updatePhone" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="updateEmail" required>
+        </div>
+        <div>
+            <label for="street">Street:</label>
+            <input type="text" name="street" id="updateStreet" required>
+        </div>
+        <div>
+            <label for="street2">Street 2:</label>
+            <input type="text" name="street2" id="updateStreet2">
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="updateCity" required>
+        </div>
+        <div>
+            <label for="state">State:</label>
+            <input type="text" name="state" id="updateState" required>
+        </div>
+        <div>
+            <label for="zip">Zip code:</label>
+            <input type="number" name="zip" id="updateZip" required>
+        </div>
+
+        <div>
+            <button type="submit" class="submit-button">Update</button>
+        </div>
+    </form>
+
+    <!-- Form for deleting a Customer -->
+    <h2 class="form-title">Delete a Customer</h2>
+    <form class="customer-form" id="deleteCustomer" method="POST" action="/deleteCustomer">
+        <div>
+            <label for="customerID">Select a Customer:</label>
+            <select name="customerID" id="deleteCustomerSelect">
+                <option selected>Choose a customer</option>
+                {{#each data}}
+                <option value="{{this.Customer_id}}">{{this.Customer_id}}- {{this.Customer_fname}} {{this.Customer_lname}} - Phone: {{this.Customer_phone}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="submit-button">Delete</button>
+        </div>
+    </form>
+    <script src="/js/customer-form.js"></script>
+</body>
+</html>

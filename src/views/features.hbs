@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <table width="70%">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="cars">Cars</a></td>
+            <td><a href="customers">Customers</a></td>
+            <td><a href="transactions">Transactions</a></td>
+            <td><a href="salespeople">Salespeople</a></td>
+            <td><a href="financeCompanies">Finance Companies</a></td>
+            <td><a href="features">Features</a></td>
+            <td><a href="carFeatures">Car Features</a></td>
+        </tr>
+    </table>
+    
+    <!-- Display Features -->
+    <h1 class="header">Features</h1>
+    <table class="portfolio" id="features-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Feature Name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr class="item">
+                <td>{{this.Feature_id}}</td>
+                <td>{{this.Feature_name}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    
+
+    <!-- Form for creating a Feature -->
+    <h2 class="header">Add a Feature</h2>
+    <form class="info" id="createFeature" method="POST" action="/createFeature">
+        <div>
+            <label for="featureCreate">Feature Name:</label>
+            <input type="text" id="featureCreate" name="featureCreate" required>
+        </div>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+
+    <!-- Form for updating a Feature -->
+    <h2 class="header">Update a Feature</h2>
+    <form class="info" id="updateFeature" method="POST" action="/updateFeature">
+        <div>
+            <label for="featureID">Select a Feature:</label>
+            <select name="featureID" id="featureID">
+                <option selected>Choose a feature</option>
+                {{#each data}}
+                <option value="{{this.Feature_id}}">{{this.Feature_id}} - {{this.Feature_name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <label for="featureName">Feature Name:</label>
+            <input type="text" id="featureName" name="featureName" required>
+        </div>
+        <div>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+
+    <!-- Form for deleting a Feature -->
+    <h2 class="header">Delete a Feature</h2>
+    <form class="info" id="deleteFeature" method="POST" action="/deleteFeature">
+        <div>
+            <label for="featureID">Select a Feature:</label>
+            <select name="featureID" id="deleteFeatureSelect">
+                <option selected>Choose a feature</option>
+                {{#each data}}
+                <option value="{{this.Feature_id}}">{{this.Feature_id}} - {{this.Feature_name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Delete</button>
+        </div>
+    </form>
+
+    <script src="/js/features-form.js"></script>
+</body>
+</html>

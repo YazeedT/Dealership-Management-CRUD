@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salespeople</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <table width="70%">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="cars">Cars</a></td>
+            <td><a href="customers">Customers</a></td>
+            <td><a href="transactions">Transactions</a></td>
+            <td><a href="salespeople">Salespeople</a></td>
+            <td><a href="financeCompanies">Finance Companies</a></td>
+            <td><a href="features">Features</a></td>
+            <td><a href="carFeatures">Car Features</a></td>
+        </tr>
+    </table>
+
+    <h1 class="header">Salespeople</h1>
+    <table class="portfolio" id="salespeople-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr class="item">
+                <td>{{this.Salesperson_id}}</td>
+                <td>{{this.Salesperson_fname}}</td>
+                <td>{{this.Salesperson_lname}}</td>
+                <td>{{this.Salesperson_phone}}</td>
+                <td>{{this.Salesperson_email}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+  
+    <!-- Form for creating a Salesperson -->
+    <h2 class="header">Add a Salesperson</h2>
+    <form class="info" id="createSalespersonForm" method="POST" action="/createSalesperson">
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+        </div>
+
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+        </div>
+
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+
+    <!-- Form for updating a Salesperson -->
+    <h2 class="header">Update a Salesperson</h2>
+    <form class="info" id="updateSalespersonForm" method="POST" action="/updateSalesperson">
+        <div>
+            <label for="salespersonID">Select a Salesperson:</label>
+            <select name="salespersonID" id="salespersonSelect">
+                <option selected>Choose a salesperson</option>
+                {{#each data}}
+                <option value="{{this.Salesperson_id}}">{{this.Salesperson_id}} - {{this.Salesperson_fname}} - {{this.Salesperson_lname}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="updateFirstName" name="firstName" required>
+        </div>
+
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="updateLastName" name="lastName" required>
+        </div>
+
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="updatePhone" name="phone" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="updateEmail" name="email" required>
+        </div>
+        <div>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+
+    <!-- Form for deleting a Salesperson -->
+    <h2 class="header">Delete a Salesperson</h2>
+    <form class="info" id="deleteSalespersonForm" method="POST" action="/deleteSalesperson">
+        <div>
+            <label for="salespersonID">Select a Salesperson:</label>
+            <select name="salespersonID" id="deleteSalespersonSelect">
+                <option selected>Choose a salesperson</option>
+                {{#each data}}
+                <option value="{{this.Salesperson_id}}">{{this.Salesperson_id}} - {{this.Salesperson_fname}} {{this.Salesperson_lname}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Delete</button>
+        </div>
+    </form>
+
+    <script src="/js/salespeople-form.js"></script>
+</body>
+</html>

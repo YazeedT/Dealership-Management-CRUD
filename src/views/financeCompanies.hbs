@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Companies</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <table width="70%">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="cars">Cars</a></td>
+            <td><a href="customers">Customers</a></td>
+            <td><a href="transactions">Transactions</a></td>
+            <td><a href="salespeople">Salespeople</a></td>
+            <td><a href="financeCompanies">Finance Companies</a></td>
+            <td><a href="features">Features</a></td>
+            <td><a href="carFeatures">Car Features</a></td>
+        </tr>
+    </table>
+    
+
+    <!-- Display Finance Companies -->
+    <h1 class="header">Finance Companies</h1>
+    <table class="portfolio" id="finance-companies-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Company Name</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>Street 2</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr class="item">
+                <td>{{this.Finance_company_id}}</td>
+                <td>{{this.Finance_company_name}}</td>
+                <td>{{this.Finance_company_email}}</td>
+                <td>{{this.Finance_company_street}}</td>
+                <td>{{this.Finance_company_second_street}}</td>
+                <td>{{this.Finance_company_city}}</td>
+                <td>{{this.Finance_company_state}}</td>
+                <td>{{this.Finance_company_zip}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+
+
+    <!-- Form for creating a Finance Company -->
+    <h2 class="header">Add a Finance Company</h2>
+    <form class="info" id="createFinanceCompanyForm" method="POST" action="/createFinanceCompany">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street" required>
+        </div>
+        <div>
+            <label for="secondStreet">Second Street:</label>
+            <input type="text" id="secondStreet" name="secondStreet">
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+        </div>
+        <div>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+        </div>
+        <div>
+            <label for="zip">ZIP:</label>
+            <input type="text" id="zip" name="zip" required>
+        </div>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+
+    <!-- Form for updating a Finance Company -->
+    <h2 class="header">Update a Finance Company</h2>
+    <form class="info" id="updateFinanceCompanyForm" method="POST" action="/updateFinanceCompany">
+        <div>
+            <label for="financeCompanyID">Select a Company:</label>
+            <select name="financeCompanyID" id="financeCompanyID">
+                <option selected>Choose a company</option>
+                {{#each data}}
+                <option value="{{this.Finance_company_id}}">{{this.Finance_company_id}} - {{this.Finance_company_name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <label for="updateName">Name:</label>
+            <input type="text" id="updateName" name="updateName" required>
+        </div>
+        <div>
+            <label for="updateEmail">Email:</label>
+            <input type="email" id="updateEmail" name="updateEmail" required>
+        </div>
+        <div>
+            <label for="updateStreet">Street:</label>
+            <input type="text" id="updateStreet" name="updateStreet" required>
+        </div>
+        <div>
+            <label for="updateSecondStreet">Second Street:</label>
+            <input type="text" id="updateSecondStreet" name="updateSecondStreet">
+        </div>
+        <div>
+            <label for="updateCity">City:</label>
+            <input type="text" id="updateCity" name="updateCity" required>
+        </div>
+        <div>
+            <label for="updateState">State:</label>
+            <input type="text" id="updateState" name="updateState" required>
+        </div>
+        <div>
+            <label for="updateZip">ZIP:</label>
+            <input type="text" id="updateZip" name="updateZip" required>
+        </div>
+        <div>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+
+
+    <!-- Form for deleting a Finance Company -->
+    <h2 class="header">Delete a Finance Company</h2>
+    <form class="info" id="deleteFinanceCompanyForm" method="POST" action="/deleteFinanceCompany">
+        <div>
+            <label for="deleteFinanceCompanyID">Select a Company:</label>
+            <select name="deleteFinanceCompanyID" id="deleteFinanceCompanyID">
+                <option selected>Choose a company</option>
+                {{#each data}}
+                <option value="{{this.Finance_company_id}}">{{this.Finance_company_id}} - {{this.Finance_company_name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Delete</button>
+        </div>
+    </form>
+    
+    <script src="/js/financeCompanies-form.js"></script>
+</body>
+</html>

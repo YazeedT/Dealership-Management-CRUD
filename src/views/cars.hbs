@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <!-- Navbar -->
+    <table width="70%">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="cars">Cars</a></td>
+            <td><a href="customers">Customers</a></td>
+            <td><a href="transactions">Transactions</a></td>
+            <td><a href="salespeople">Salespeople</a></td>
+            <td><a href="financeCompanies">Finance Companies</a></td>
+            <td><a href="features">Features</a></td>
+            <td><a href="carFeatures">Car Features</a></td>
+        </tr>
+    </table>
+
+    <h1>Cars</h1>
+    <!-- Search form -->
+    <form id="searchByMake" method='GET' action='/cars'>
+        <label for="input-make">Search by Car Make:</label>
+        <input type="text" name="make" id="searchByMake" placeholder="Enter car make">
+
+        <input type="submit">
+        <a href='/cars'><button>Reset</button></a>
+    </form>
+
+    <!-- Display Cars -->
+    <table id="cars-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Color</th>
+                <th>Milage</th>
+                <th>VIN</th>
+                <th>Price</th>
+                <th>Forsale?</th>
+                <th>Customer ID</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.Car_id}}</td>
+                <td>{{this.Car_make}}</td>
+                <td>{{this.Car_model}}</td>
+                <td>{{this.Car_year}}</td>
+                <td>{{this.Car_color}}</td>
+                <td>{{this.Car_mileage}}</td>
+                <td>{{this.Car_vin}}</td>
+                <td>{{this.Car_price}}</td>
+                <td>{{this.Car_forsale}}</td>
+                <td>{{this.Customer_id}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    
+
+    <!-- Form for adding a new Car -->
+    <h2>Add a Car</h2>
+    <form id="createCar" method="POST" action="/createCar">
+        <div>
+            <label for="make">Make:</label>
+            <input type="text" id="make" name="make" required>
+        </div>
+
+        <div>
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required>
+        </div>
+
+        <div>
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" required>
+        </div>
+
+        <div>
+            <label for="color">Color:</label>
+            <input type="text" id="color" name="color" required>
+        </div>
+
+        <div>
+            <label for="mileage">Mileage:</label>
+            <input type="number" id="mileage" name="mileage" required>
+        </div>
+
+        <div>
+            <label for="vin">VIN:</label>
+            <input type="text" id="vin" name="vin" required>
+        </div>
+
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div>
+            <label for="forSale">For Sale:</label>
+            <select id="forSale" name="forSale" required>
+                <option selected>Is the car for sale?</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="customerID">Select Customer:</label>
+            <select id="customerID" name="customerID">
+                <option value="" selected>Choose a customer</option>
+                {{#each customers}}
+                <option value="{{this.Customer_id}}">{{this.Customer_fname}} {{this.Customer_lname}} - Phone: {{this.Customer_phone}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <!-- Button for adding -->
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+
+<!-- Form for updating an existing Car -->
+<h2>Update a Car</h2>
+<form id="updateCar" method="POST" action="/updateCar">
+    <div>
+        <label for="CarID">Select a Car:</label>
+        <select name="CarID" id="updateCarSelect">
+            <option selected>Choose a car</option>
+            {{#each data}}
+            <option value="{{this.Car_id}}">{{this.Car_id}} {{this.Car_make}} {{this.Car_model}} {{this.Car_year}}, VIN:{{this.Car_vin}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div>
+        <label for="updateMake">Make:</label>
+        <input type="text" id="updateMake" name="make" required>
+    </div>
+
+    <div>
+        <label for="updateModel">Model:</label>
+        <input type="text" id="updateModel" name="model" required>
+    </div>
+
+    <div>
+        <label for="updateYear">Year:</label>
+        <input type="number" id="updateYear" name="year" required>
+    </div>
+
+    <div>
+        <label for="updateColor">Color:</label>
+        <input type="text" id="updateColor" name="color" required>
+    </div>
+
+    <div>
+        <label for="updateMileage">Mileage:</label>
+        <input type="number" id="updateMileage" name="mileage" required>
+    </div>
+
+    <div>
+        <label for="updateVin">VIN:</label>
+        <input type="text" id="updateVin" name="vin" required>
+    </div>
+
+    <div>
+        <label for="updatePrice">Price:</label>
+        <input type="number" id="updatePrice" name="price" required>
+    </div>
+
+    <div>
+        <label for="updateForSale">For Sale:</label>
+        <select id="updateForSale" name="forSale" required>
+            <option selected>Is the car for sale?</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="updateCustomerID">Select Customer:</label>
+        <select id="updateCustomerID" name="customerID">
+            <option value="" selected>Choose a customer</option>
+            {{#each customers}}
+            <option value="{{this.Customer_id}}">{{this.Customer_fname}} {{this.Customer_lname}} - Phone: {{this.Customer_phone}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <!-- Button for updating -->
+    <div>
+        <button type="submit">Update</button>
+    </div>
+</form>
+
+
+    <!-- Form for deleting a Car -->
+    <h2>Delete a Car</h2>
+    <form id="deleteCar" method="POST" action="/deleteCar">
+            <div>
+                <td><label for="carID">Select a Car:</label></td>
+                <td><select name="carID" id="deleteCarSelect">
+                    <option selected>Choose a car</option>
+                    {{#each data}}
+                    <option value="{{this.Car_id}}">{{this.Car_make}} {{this.Car_model}} {{this.Car_year}}, VIN:{{this.Car_vin}}</option>
+                    {{/each}}
+                </select></td>
+            </div>
+            <div>
+                <td><button type="submit">Delete</button></td>
+            </div>
+    <script src="/js/cars-form.js"></script>
+</body>
+</html>

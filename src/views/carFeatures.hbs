@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Features</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <table width="70%">
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="cars">Cars</a></td>
+            <td><a href="customers">Customers</a></td>
+            <td><a href="transactions">Transactions</a></td>
+            <td><a href="salespeople">Salespeople</a></td>
+            <td><a href="financeCompanies">Finance Companies</a></td>
+            <td><a href="features">Features</a></td>
+            <td><a href="carFeatures">Car Features</a></td>
+        </tr>
+    </table>
+    
+    <h1 class="header">Car Features</h1>
+    <table class="portfolio" id="car-features-table">
+        <thead>
+            <tr>
+                <th>Car ID</th>
+                <th>Feature ID</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr class="item">
+                <td>{{this.Car_id}}</td>
+                <td>{{this.Feature_id}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <!-- Form for creating a new Feature -->
+    <h2 class="header">Add a new Feature to a Car</h2>
+    <form id="createCarFeature" method="POST" action="/createCarFeature">
+        <div class="info">
+            <label for="carFK">Car FK:</label>
+            <select name="carFK" id="carFK">
+                <option selected>Choose a car</option>
+                {{#each cars}}
+                <option value="{{this.Car_id}}">{{this.Car_make}} {{this.Car_model}} {{this.Car_year}} (ID: {{this.Car_id}})</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="info">
+            <label for="featureFK">Feature FK:</label>
+            <select name="featureFK" id="featureFK">
+                <option selected>Choose a feature</option>
+                {{#each features}}
+                <option value="{{this.Feature_id}}">{{this.Feature_name}} (ID: {{this.Feature_id}})</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+
+    <!-- Form for updating a Car feature -->
+    <h2 class="header">Update a Car Feature</h2>
+    <form class="info" id="updateCarFeature" method="POST" action="/updateCarFeature">
+        <div>
+            <label for="carFeatureID">Select a Car Feature:</label>
+            <select name="carFeatureID" id="updateCarFeature">
+                <option selected>Choose a Car Feature</option>
+                {{#each data}}
+                <option value="{{this.Car_id}}-{{this.Feature_id}}">Car ID:{{this.Car_id}} - Feature ID: {{this.Feature_id}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="info">
+            <label for="newFeatureID">New Feature FK:</label>
+            <select name="newFeatureID" id="newFeatureID">
+                <option selected>Choose a feature</option>
+                {{#each features}}
+                <option value="{{this.Feature_id}}">{{this.Feature_name}} (ID: {{this.Feature_id}})</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+
+
+    <!-- Form for deleting a Car Feature -->
+    <h2 class="header">Delete a Feature from a Car</h2>
+    <form id="deleteCarFeature" method="POST" action="/deleteCarFeature">
+        <div class="info">
+            <label for="carFeatureID">Select a Car Feature:</label>
+            <select name="carFeatureID" id="deleteCarFeatureSelect">
+                <option selected>Choose a car's feature</option>
+                {{#each data}}
+                    <option value="{{this.Car_id}}-{{this.Feature_id}}">
+                        Car ID: {{this.Car_id}} - Feature ID: {{this.Feature_id}}
+                    </option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Delete</button>
+        </div>
+    </form>
+    
+</body>
+</html>
